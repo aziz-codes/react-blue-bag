@@ -16,6 +16,8 @@ export interface InputProps {
     variant?: InputVariant
     /** Icon element rendered on the left side */
     icon?: React.ReactNode
+    /** Placeholder text */
+    placeholder?: string
 
     className?: string;
     id?: string;
@@ -46,7 +48,7 @@ export function Input({
     error,
     size = 'md',
     variant = 'default',
-    icon,
+    placeholder = "", icon,
     className = '',
     id: providedId,
     required,
@@ -103,6 +105,7 @@ export function Input({
                     aria-describedby={hint || error ? `${id}-description` : undefined}
                     required={required}
                     {...props}
+                    placeholder={placeholder}
                 />
             </div>
 

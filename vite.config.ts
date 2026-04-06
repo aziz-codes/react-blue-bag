@@ -9,9 +9,6 @@ export default defineConfig({
     react(),
     tailwindcss(),
     dts({
-      include: ["src"],
-      exclude: ["src/**/*.test.*"],
-      rollupTypes: true,
       tsconfigPath: "./tsconfig.app.json",
     }),
   ],
@@ -29,6 +26,7 @@ export default defineConfig({
           "react-dom": "ReactDOM",
           "react/jsx-runtime": "jsxRuntime",
         },
+        exports: "named",
       },
     },
     cssCodeSplit: false,
