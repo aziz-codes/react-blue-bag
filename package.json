@@ -1,6 +1,6 @@
 {
   "name": "react-blue-bag",
-  "version": "0.1.2",
+  "version": "0.1.6",
   "description": "A styled React component library using TailwindCSS",
   "type": "module",
   "main": "./dist/react-blue-bag.umd.cjs",
@@ -11,11 +11,11 @@
       "import": "./dist/react-blue-bag.js",
       "require": "./dist/react-blue-bag.umd.cjs",
       "types": "./dist/src/index.d.ts"
-    },
-    "./style.css": "./dist/react-blue-bag.css"
+    }
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "dev": "vite",
