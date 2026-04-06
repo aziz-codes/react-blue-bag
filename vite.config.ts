@@ -2,12 +2,22 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { resolve } from "path";
+import dts from "vite-plugin-dts";
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    dts({
+      include: ["src"],
+      exclude: ["src/**/*.test.*"],
+      rollupTypes: true,
+      tsconfigPath: "./tsconfig.app.json",
+    }),
+  ],
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.tsx"),
+      entry: resolve(__dirname, "src/index.ts"),
       name: "ReactBlueBag",
       fileName: "react-blue-bag",
     },
