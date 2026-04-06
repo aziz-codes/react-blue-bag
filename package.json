@@ -1,43 +1,51 @@
 {
   "name": "react-blue-bag",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A styled React component library using TailwindCSS",
   "type": "module",
   "main": "./dist/react-blue-bag.umd.cjs",
   "module": "./dist/react-blue-bag.js",
+  "types": "./dist/src/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/react-blue-bag.js",
-      "require": "./dist/react-blue-bag.umd.cjs"
+      "require": "./dist/react-blue-bag.umd.cjs",
+      "types": "./dist/src/index.d.ts"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": "./dist/react-blue-bag.css"
   },
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build": "vite build",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build"
   },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.2.2",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+  "keywords": [
+    "react",
+    "components",
+    "tailwindcss",
+    "ui",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "@types/node": "^24.12.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "eslint": "^9.39.4",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.4.0",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.58.0",
-    "vite": "^8.0.4"
+    "@tailwindcss/vite": "^4.1.3",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.3",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.1",
+    "vite-plugin-dts": "^4.5.3"
   }
 }

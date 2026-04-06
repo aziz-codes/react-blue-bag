@@ -1,26 +1,39 @@
-import { useState, useId } from 'react'
+import React, { useState, useId } from 'react'
 
-interface InputProps {
+type InputSize = 'sm' | 'md' | 'lg'
+type InputVariant = 'default' | 'filled' | 'ghost'
+
+export interface InputProps {
+    /** Label displayed above the input */
     label?: string
-    id?: string;
+    /** Helper text shown below the input */
     hint?: string
-    required?: boolean;
+    /** Error message — replaces hint and applies error styling */
     error?: string
-    size?: 'sm' | 'md' | 'lg'
-    variant?: 'default' | 'filled' | 'ghost'
+    /** Size of the input */
+    size?: InputSize
+    /** Visual style variant */
+    variant?: InputVariant
+    /** Icon element rendered on the left side */
     icon?: React.ReactNode
+    /** Placeholder text */
+    placeholder?: string
+
     className?: string;
+    id?: string;
+    required?: boolean;
     onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
     onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+
 }
 
-const sizeClasses = {
+const sizeClasses: Record<InputSize, string> = {
     sm: 'px-3 py-1.5 text-sm',
     md: 'px-4 py-2.5 text-sm',
     lg: 'px-5 py-3.5 text-base',
 }
 
-const variantClasses = {
+const variantClasses: Record<InputVariant, string> = {
     default:
         'bg-white border-zinc-200 text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:ring-blue-500/20',
     filled:
@@ -35,20 +48,21 @@ export function Input({
     error,
     size = 'md',
     variant = 'default',
-    icon,
+    placeholder = "", icon,
     className = '',
     id: providedId,
     required,
+    onFocus,
+    onBlur,
     ...props
 }: InputProps) {
     const [focused, setFocused] = useState(false)
     const autoId = useId()
     const id = providedId || autoId
-
     const hasError = Boolean(error)
 
     return (
-        <div className={`group flex flex-col gap-1.5 ${className}`}>
+        <div className={`flex flex-col gap-1.5 ${className}`}>
             {label && (
                 <label
                     htmlFor={id}
@@ -76,8 +90,8 @@ export function Input({
 
                 <input
                     id={id}
-                    onFocus={(e) => { setFocused(true); props.onFocus?.(e) }}
-                    onBlur={(e) => { setFocused(false); props.onBlur?.(e) }}
+                    onFocus={(e) => { setFocused(true); onFocus?.(e) }}
+                    onBlur={(e) => { setFocused(false); onBlur?.(e) }}
                     className={[
                         'w-full rounded-lg border font-medium transition-all duration-150 outline-none focus:ring-4',
                         'disabled:opacity-50 disabled:cursor-not-allowed',
@@ -87,10 +101,11 @@ export function Input({
                             : variantClasses[variant],
                         icon ? 'pl-10' : '',
                     ].join(' ')}
-                    aria-invalid={hasError}
+                    aria-invalid={hasError || undefined}
                     aria-describedby={hint || error ? `${id}-description` : undefined}
                     required={required}
                     {...props}
+                    placeholder={placeholder}
                 />
             </div>
 
